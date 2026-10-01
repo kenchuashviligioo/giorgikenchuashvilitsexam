@@ -98,8 +98,6 @@ console.log(`რეიტინგი: ${movie.rating}/10`);
 
 // სწავლის შეფასება 4
 
-// 4.1
-
 class Actor {
   firstName: string;
   lastName: string;
@@ -117,21 +115,32 @@ class Actor {
     this.nationality = nationality;
     this.age = age;
   }
+
+  getBio(): string {
+    return `სახელი, გვარი: ${this.firstName} ${this.lastName} | წარმოშობა: ${this.nationality} | ასაკი: ${this.age} წლის.`;
+  }
 }
 
-// 4.2
+const actor = new Actor("Brad", "Pitt", "America", 62);
 
-const actor = new Actor("Brad", "Pitt", "america", 62);
-
-console.log(
-  `სახელი, გვარი: ${actor.firstName} ${actor.lastName} | წარმოშობა: ${actor.nationality} | ასაკი: ${actor.age} წლის.`
-);
-
-// 4.3
+console.log(actor.getBio());
 
 class LeadActor extends Actor {
-  getAwards() {
-    return "Oscar,Grammy,BAFTA";
+  awards: string[];
+
+  constructor(
+    firstName: string,
+    lastName: string,
+    nationality: string,
+    age: number,
+    awards: string[] = []
+  ) {
+    super(firstName, lastName, nationality, age);
+    this.awards = awards;
+  }
+
+  getAwards(): string {
+    return this.awards.join(", ");
   }
 }
 
@@ -139,7 +148,9 @@ const GiorgiLeadActor = new LeadActor(
   "Giorgi",
   "Kenchuashvili",
   "Georgian",
-  19
+  19,
+  ["Oscar", "Grammy", "BAFTA"]
 );
 
+console.log(GiorgiLeadActor.getBio());
 console.log(GiorgiLeadActor.getAwards());
